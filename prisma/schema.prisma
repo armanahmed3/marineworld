@@ -1,0 +1,235 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  password  String
+  email     String?
+  role      String   @default("admin")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model InventoryItem {
+  id            Int      @id @default(autoincrement())
+  title         String
+  year          Int?
+  make          String?
+  model         String?
+  category      String?
+  type          String?
+  condition     String?
+  price         Float?
+  salePrice     Float?
+  description   String?
+  vin           String?
+  stockNumber   String?
+  status        String   @default("available")
+  featured      Boolean  @default(false)
+  images        InventoryImage[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model InventoryImage {
+  id        Int           @id @default(autoincrement())
+  url       String
+  alt       String?
+  sortOrder Int           @default(0)
+  inventory InventoryItem @relation(fields: [inventoryId], references: [id], onDelete: Cascade)
+  inventoryId Int
+}
+
+model Lead {
+  id        Int      @id @default(autoincrement())
+  type      String
+  firstName String?
+  lastName  String?
+  email     String?
+  phone     String?
+  message   String?
+  metadata  String?
+  status    String   @default("new")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Testimonial {
+  id        Int      @id @default(autoincrement())
+  name      String
+  title     String?
+  content   String
+  rating    Int      @default(5)
+  approved  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ContentSnippet {
+  id        Int      @id @default(autoincrement())
+  key       String   @unique
+  title     String?
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Announcement {
+  id        Int      @id @default(autoincrement())
+  title     String
+  content   String
+  active    Boolean  @default(true)
+  startDate DateTime?
+  endDate   DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Survey {
+  id        Int             @id @default(autoincrement())
+  title     String
+  questions String?
+  active    Boolean         @default(true)
+  responses SurveyResponse[]
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+}
+
+model SurveyResponse {
+  id        Int      @id @default(autoincrement())
+  surveyId  Int
+  survey    Survey   @relation(fields: [surveyId], references: [id], onDelete: Cascade)
+  answers   String?
+  email     String?
+  createdAt DateTime @default(now())
+}
+
+model SlideImage {
+  id        Int      @id @default(autoincrement())
+  title     String?
+  subtitle  String?
+  imageUrl  String
+  linkUrl   String?
+  sortOrder Int      @default(0)
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Event {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String?
+  startDate   DateTime
+  endDate     DateTime?
+  location    String?
+  imageUrl    String?
+  linkUrl     String?
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model NewsletterSubscriber {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String?
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
+
+model StaffMember {
+  id          Int      @id @default(autoincrement())
+  name        String
+  title       String?
+  bio         String?
+  imageUrl    String?
+  email       String?
+  phone       String?
+  sortOrder   Int      @default(0)
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ServiceRequest {
+  id          Int      @id @default(autoincrement())
+  firstName   String
+  lastName    String
+  email       String
+  phone       String
+  vehicleInfo String?
+  serviceType String?
+  message     String?
+  status      String   @default("pending")
+  createdAt   DateTime @default(now())
+}
+
+model PartRequest {
+  id        Int      @id @default(autoincrement())
+  firstName String
+  lastName  String
+  email     String
+  phone     String
+  partInfo  String?
+  message   String?
+  status    String   @default("pending")
+  createdAt DateTime @default(now())
+}
+
+model FinanceApplication {
+  id               Int      @id @default(autoincrement())
+  firstName        String
+  lastName         String
+  email            String
+  phone            String
+  address          String?
+  city             String?
+  state            String?
+  zip              String?
+  employmentInfo   String?
+  annualIncome     Float?
+  creditScore      String?
+  desiredAmount    Float?
+  status           String   @default("pending")
+  createdAt        DateTime @default(now())
+}
+
+model TradeIn {
+  id            Int      @id @default(autoincrement())
+  firstName     String
+  lastName      String
+  email         String
+  phone         String
+  year          Int?
+  make          String?
+  model         String?
+  vin           String?
+  mileage       Int?
+  condition     String?
+  notes         String?
+  status        String   @default("pending")
+  createdAt     DateTime @default(now())
+}
+
+model EmailSetting {
+  id        Int      @id @default(autoincrement())
+  key       String   @unique
+  value     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model LeadHunterSetting {
+  id        Int      @id @default(autoincrement())
+  key       String   @unique
+  value     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
