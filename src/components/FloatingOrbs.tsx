@@ -20,13 +20,11 @@ function OrbsScene() {
   const groupRef = useRef<THREE.Group>(null!)
 
   const orbs: OrbConfig[] = useMemo(() => [
-    { pos: [-12, 5, -8], color: '#1a2a5a', size: 1.5, type: 'icosahedron', speed: 0.6, floatIntensity: 0.4, rotationSpeed: 0.2 },
-    { pos: [10, -8, -10], color: '#3a1a2a', size: 1.8, type: 'torusKnot', speed: 0.8, floatIntensity: 0.5, rotationSpeed: 0.15 },
-    { pos: [-8, -12, -12], color: '#2a3a6a', size: 1.2, type: 'octahedron', speed: 0.5, floatIntensity: 0.3, rotationSpeed: 0.25 },
-    { pos: [14, 3, -15], color: '#4a1a2a', size: 1.0, type: 'dodecahedron', speed: 0.7, floatIntensity: 0.6, rotationSpeed: 0.18 },
-    { pos: [-15, 10, -6], color: '#1a2a4a', size: 2.0, type: 'torusKnot', speed: 0.4, floatIntensity: 0.35, rotationSpeed: 0.12 },
-    { pos: [6, -15, -18], color: '#2a1a3a', size: 1.3, type: 'icosahedron', speed: 0.9, floatIntensity: 0.45, rotationSpeed: 0.22 },
-    { pos: [-4, 15, -14], color: '#1a3a2a', size: 0.9, type: 'octahedron', speed: 0.55, floatIntensity: 0.5, rotationSpeed: 0.3 },
+    { pos: [-16, 8, -12], color: '#38bdf8', size: 1.2, type: 'icosahedron', speed: 0.6, floatIntensity: 0.4, rotationSpeed: 0.2 },
+    { pos: [14, -10, -14], color: '#818cf8', size: 1.4, type: 'torusKnot', speed: 0.8, floatIntensity: 0.5, rotationSpeed: 0.15 },
+    { pos: [-12, -14, -16], color: '#60a5fa', size: 1.0, type: 'octahedron', speed: 0.5, floatIntensity: 0.3, rotationSpeed: 0.25 },
+    { pos: [18, 5, -18], color: '#f43f5e', size: 0.8, type: 'dodecahedron', speed: 0.7, floatIntensity: 0.6, rotationSpeed: 0.18 },
+    { pos: [-18, 14, -10], color: '#0ea5e9', size: 1.5, type: 'torusKnot', speed: 0.4, floatIntensity: 0.35, rotationSpeed: 0.12 },
   ], [])
 
   useFrame(({ clock }) => {
@@ -37,9 +35,8 @@ function OrbsScene() {
 
   return (
     <>
-      <ambientLight intensity={0.3} />
-      <pointLight position={[0, 0, 0]} intensity={0.5} color="#4488cc" />
-      <pointLight position={[10, -10, 5]} intensity={0.3} color="#8844aa" />
+      <ambientLight intensity={0.5} />
+      <pointLight position={[0, 0, 0]} intensity={0.8} color="#38bdf8" />
 
       <group ref={groupRef}>
         {orbs.map((orb, i) => {
@@ -61,16 +58,21 @@ function OrbsScene() {
               geometry = <icosahedronGeometry args={[orb.size, 0]} />
           }
           return (
-            <Float key={i} speed={orb.speed} rotationIntensity={orb.rotationSpeed} floatIntensity={orb.floatIntensity}>
+            <Float
+              key={i}
+              speed={orb.speed}
+              rotationIntensity={orb.rotationSpeed}
+              floatIntensity={orb.floatIntensity}
+            >
               <mesh position={orb.pos}>
                 {geometry}
                 <meshStandardMaterial
                   color={orb.color}
-                  metalness={0.3}
-                  roughness={0.5}
+                  metalness={0.1}
+                  roughness={0.2}
                   transparent
-                  opacity={0.2}
-                  wireframe={i % 2 === 0}
+                  opacity={0.15}
+                  wireframe
                 />
               </mesh>
             </Float>
