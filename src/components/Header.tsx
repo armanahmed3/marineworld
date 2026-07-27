@@ -395,7 +395,7 @@ export default function Header() {
         }
       `}</style>
     </header>
-      <div style={{ height: '151px' }} />
+      <div className="h-[65px] md:h-[151px]" />
     </>
   )
 }

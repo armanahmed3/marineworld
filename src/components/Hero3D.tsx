@@ -60,16 +60,16 @@ const ThreeScene = dynamic(() => Promise.resolve(Scene3DContent), { ssr: false }
 
 export default function Hero3D() {
   return (
-    <section className="relative w-full h-screen overflow-hidden bg-[#0A0E1B]">
+    <section className="relative w-full h-[85vh] min-h-[500px] sm:h-screen sm:min-h-[650px] overflow-hidden bg-[#0A0E1B]">
       {/* Crisp Hero Image from HTML Slideshow */}
       <img
         src="/images/Supra_SL_20240605_1396_GCM.jpg"
         alt="Marine World of Texas Boat"
-        className="absolute inset-0 w-full h-full object-cover object-center scale-105"
+        className="absolute inset-0 w-full h-full object-cover object-[65%_center] sm:object-center scale-100 sm:scale-105 transition-all duration-500"
       />
 
       {/* Subtle Gradient Overlay for Text Legibility without obscuring the boat */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#0A0E1B] via-transparent to-black/30" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0A0E1B] via-black/20 to-black/40 sm:to-black/30" />
 
       {/* 3D Ambient Particles Layer (No black solid objects) */}
       <div className="absolute inset-0 pointer-events-none z-0">
@@ -86,18 +86,18 @@ export default function Hero3D() {
       </div>
 
       {/* Hero Content Overlay */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center px-4 z-10">
+      <div className="absolute inset-0 flex flex-col items-center justify-center px-4 sm:px-6 pt-12 sm:pt-0 z-10">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.2 }}
           className="text-center max-w-5xl"
         >
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black tracking-tight text-white uppercase leading-none drop-shadow-2xl">
+          <h1 className="text-3xl xs:text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black tracking-tight text-white uppercase leading-tight sm:leading-none drop-shadow-2xl">
             <span className="block drop-shadow-[0_10px_10px_rgba(0,0,0,0.8)]">MARINE WORLD</span>
-            <span className="block text-[#EB2E25] mt-1 drop-shadow-[0_10px_10px_rgba(0,0,0,0.8)]">OF TEXAS</span>
+            <span className="block text-[#EB2E25] mt-0.5 sm:mt-1 drop-shadow-[0_10px_10px_rgba(0,0,0,0.8)]">OF TEXAS</span>
           </h1>
-          <p className="mt-4 text-base sm:text-lg md:text-xl text-gray-100 font-light tracking-[0.2em] uppercase drop-shadow-md bg-black/40 px-6 py-2 rounded-full inline-block backdrop-blur-md border border-white/20">
+          <p className="mt-2.5 sm:mt-4 text-xs xs:text-sm sm:text-lg md:text-xl text-gray-100 font-light tracking-[0.15em] sm:tracking-[0.2em] uppercase drop-shadow-md bg-black/50 px-4 py-1.5 sm:px-6 sm:py-2 rounded-full inline-block backdrop-blur-md border border-white/20 max-w-[90vw]">
             Your Premier Marine Dealer in Whitehouse, TX
           </p>
         </motion.div>
@@ -106,17 +106,17 @@ export default function Hero3D() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.6 }}
-          className="mt-8 flex flex-col sm:flex-row gap-4"
+          className="mt-5 sm:mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto px-6 sm:px-0 max-w-xs sm:max-w-none"
         >
           <Link
             href="/inventory"
-            className="bg-[#EB2E25] hover:bg-red-700 text-white px-10 py-4 rounded font-bold text-lg uppercase tracking-wider transition-all hover:scale-105 shadow-lg shadow-red-900/50"
+            className="bg-[#EB2E25] hover:bg-red-700 text-white px-6 py-3.5 sm:px-10 sm:py-4 rounded font-bold text-sm sm:text-lg uppercase tracking-wider transition-all hover:scale-105 shadow-lg shadow-red-900/50 text-center"
           >
             View Inventory
           </Link>
           <Link
             href="/contact"
-            className="border-2 border-white/80 bg-black/40 backdrop-blur-md hover:bg-white hover:text-[#0A0E1B] text-white px-10 py-4 rounded font-bold text-lg uppercase tracking-wider transition-all hover:scale-105 shadow-lg"
+            className="border-2 border-white/80 bg-black/40 backdrop-blur-md hover:bg-white hover:text-[#0A0E1B] text-white px-6 py-3.5 sm:px-10 sm:py-4 rounded font-bold text-sm sm:text-lg uppercase tracking-wider transition-all hover:scale-105 shadow-lg text-center"
           >
             Contact Us
           </Link>
@@ -127,7 +127,7 @@ export default function Hero3D() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
+        className="hidden sm:block absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 z-10"
       >
         <motion.div
           animate={{ y: [0, 8, 0] }}
