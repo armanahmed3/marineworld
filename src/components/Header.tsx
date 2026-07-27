@@ -73,136 +73,54 @@ export default function Header() {
 
   return (
     <>
-    <header
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 100,
-        background: 'linear-gradient(to bottom, #000 0%, rgba(0,0,0,0.8) 30%, rgba(0,0,0,0.4) 60%, transparent 100%)',
-        padding: '20px 40px',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '10px',
-      }}
-    >
-      <div
-        style={{
-          width: '100%',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}
-      >
-        <div className="header-logo" style={{ flex: '0 0 auto' }}>
+    <header className="header-main">
+      <div className="header-top-row">
+        <div className="header-logo">
           <Link href="/" title="Marine World of Texas">
             <img
               alt="Marine World of Texas"
               src="/images/marineworldoftexas-logo.png"
-              style={{ height: 'auto', width: 'auto', maxHeight: '60px', display: 'block' }}
+              className="site-logo-img"
             />
           </Link>
         </div>
 
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '20px',
-          }}
-        >
-          <div
-            className="header-social-top"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-            }}
-          >
-            <a href="https://www.facebook.com/Marineworldoftexas" target="_blank" rel="noopener noreferrer" style={{ color: '#fff', fontSize: '18px' }}>
+        <div className="header-right-actions">
+          <div className="header-social-top">
+            <a href="https://www.facebook.com/Marineworldoftexas" target="_blank" rel="noopener noreferrer" title="Facebook">
               <FaFacebook />
             </a>
-            <a href="https://x.com/MarineWorldTX" target="_blank" rel="noopener noreferrer" style={{ color: '#fff', fontSize: '18px' }}>
+            <a href="https://x.com/MarineWorldTX" target="_blank" rel="noopener noreferrer" title="Twitter">
               <FaTwitter />
             </a>
-            <a href="https://www.instagram.com/marineworldoftexas/" target="_blank" rel="noopener noreferrer" style={{ color: '#fff', fontSize: '18px' }}>
+            <a href="https://www.instagram.com/marineworldoftexas/" target="_blank" rel="noopener noreferrer" title="Instagram">
               <FaInstagram />
             </a>
-            <a href="https://www.youtube.com/@marineworldoftexas" target="_blank" rel="noopener noreferrer" style={{ color: '#fff', fontSize: '18px' }}>
+            <a href="https://www.youtube.com/@marineworldoftexas" target="_blank" rel="noopener noreferrer" title="YouTube">
               <FaYoutube />
             </a>
           </div>
-          <a
-            className="header-phone"
-            href="tel:9037050804"
-            style={{
-              color: '#fff',
-              fontSize: '24px',
-              fontWeight: 700,
-              textDecoration: 'none',
-              letterSpacing: '-0.02em',
-              fontFamily: "'Roboto Condensed', sans-serif",
-            }}
-          >
+
+          <a className="header-phone" href="tel:9037050804" title="Call Marine World of Texas">
             903.705.0804
           </a>
-          <Link
-            className="header-map-btn"
-            href="/about/hours"
-            style={{
-              border: '2px solid #fff',
-              borderRadius: '50px',
-              padding: '8px 24px',
-              color: '#fff',
-              fontSize: '12px',
-              fontWeight: 700,
-              textTransform: 'uppercase',
-              textDecoration: 'none',
-              letterSpacing: '0.05em',
-              fontFamily: "'Roboto Condensed', sans-serif",
-              transition: 'all 0.3s ease',
-            }}
-          >
+
+          <Link className="header-map-btn" href="/about/hours">
             Map &amp; Hours
           </Link>
+
           <button
             className="navbar-toggle"
             onClick={() => setMobileOpen(!mobileOpen)}
-            style={{
-              display: 'none',
-              background: 'none',
-              border: 'none',
-              color: '#fff',
-              fontSize: '24px',
-              cursor: 'pointer',
-              padding: '4px',
-            }}
+            aria-label="Toggle Navigation"
           >
             {mobileOpen ? <HiX /> : <HiMenu />}
           </button>
         </div>
       </div>
 
-      <nav
-        id="main-nav"
-        style={{
-          width: '100%',
-          display: 'flex',
-          justifyContent: 'center',
-        }}
-      >
-        <ul
-          className="navbar-nav"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0',
-            listStyle: 'none',
-            margin: 0,
-            padding: 0,
-          }}
-        >
+      <nav id="main-nav">
+        <ul className="navbar-nav">
           {navItems.map((item) => {
             const hasChildren = item.children && item.children.length > 0
             const active = item.href === '/' ? pathname === '/' : isChildActive(item.children || [{ href: item.href }])
@@ -210,61 +128,24 @@ export default function Header() {
             return (
               <li
                 key={item.label}
-                style={{ position: 'relative' }}
+                className="nav-item-li"
                 onMouseEnter={() => setOpenDropdown(item.label)}
                 onMouseLeave={() => setOpenDropdown(null)}
               >
                 <Link
                   href={item.href}
-                  style={{
-                    color: '#fff',
-                    fontSize: '15px',
-                    fontWeight: 700,
-                    padding: '10px 22px',
-                    display: 'block',
-                    textDecoration: 'none',
-                    fontFamily: "'Roboto Condensed', sans-serif",
-                    background: active ? '#EB2E25' : 'transparent',
-                    transition: 'background 0.2s',
-                  }}
+                  className={`nav-item-link ${active ? 'active' : ''}`}
                 >
                   {item.label}
-                  {hasChildren && (
-                    <span className="arrow" style={{ fontSize: '10px', marginLeft: '5px' }}>
-                      ▼
-                    </span>
-                  )}
+                  {hasChildren && <span className="arrow">▼</span>}
                 </Link>
                 {hasChildren && (
                   <ul
-                    className="dropdown-menu"
-                    style={{
-                      display: openDropdown === item.label ? 'block' : 'none',
-                      position: 'absolute',
-                      top: '100%',
-                      left: 0,
-                      background: '#ef5b54',
-                      listStyle: 'none',
-                      margin: 0,
-                      padding: 0,
-                      minWidth: '250px',
-                      zIndex: 1000,
-                    }}
+                    className={`dropdown-menu ${openDropdown === item.label ? 'is-open' : ''}`}
                   >
                     {item.children!.map((child) => (
                       <li key={child.label}>
-                        <Link
-                          href={child.href}
-                          style={{
-                            color: '#fff',
-                            padding: '8px 20px',
-                            display: 'block',
-                            textDecoration: 'none',
-                            fontSize: '14px',
-                            fontFamily: "'Roboto Condensed', sans-serif",
-                            lineHeight: '30px',
-                          }}
-                        >
+                        <Link href={child.href} className="dropdown-child-link">
                           {child.label}
                         </Link>
                       </li>
@@ -279,94 +160,48 @@ export default function Header() {
 
       {/* Mobile menu overlay */}
       {mobileOpen && (
-        <div
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            background: 'rgba(10, 14, 27, 0.98)',
-            zIndex: 200,
-            padding: '80px 20px 20px',
-            overflowY: 'auto',
-          }}
-        >
+        <div className="mobile-menu-overlay">
           <button
+            className="mobile-menu-close-btn"
             onClick={() => setMobileOpen(false)}
-            style={{
-              position: 'absolute',
-              top: '20px',
-              right: '20px',
-              background: 'none',
-              border: 'none',
-              color: '#fff',
-              fontSize: '28px',
-              cursor: 'pointer',
-            }}
+            aria-label="Close Menu"
           >
             <HiX />
           </button>
-          <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
+          
+          <ul className="mobile-nav-list">
             {navItems.map((item) => {
               const hasChildren = item.children && item.children.length > 0
               const isMobileOpen = mobileDropdownOpen === item.label
 
               return (
-                <li key={item.label} style={{ marginBottom: '4px' }}>
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                    }}
-                  >
+                <li key={item.label} className="mobile-nav-item">
+                  <div className="mobile-nav-row">
                     <Link
                       href={item.href}
                       onClick={() => setMobileOpen(false)}
-                      style={{
-                        color: '#fff',
-                        fontSize: '18px',
-                        fontWeight: 700,
-                        padding: '12px 0',
-                        textDecoration: 'none',
-                        fontFamily: "'Roboto Condensed', sans-serif",
-                        flex: 1,
-                      }}
+                      className="mobile-nav-link"
                     >
                       {item.label}
                     </Link>
                     {hasChildren && (
                       <button
                         onClick={() => setMobileDropdownOpen(isMobileOpen ? null : item.label)}
-                        style={{
-                          background: 'none',
-                          border: 'none',
-                          color: '#fff',
-                          fontSize: '14px',
-                          cursor: 'pointer',
-                          padding: '12px',
-                        }}
+                        className="mobile-dropdown-toggle"
+                        aria-label="Toggle submenu"
                       >
                         {isMobileOpen ? '▲' : '▼'}
                       </button>
                     )}
                   </div>
                   {hasChildren && isMobileOpen && (
-                    <ul style={{ listStyle: 'none', margin: 0, padding: '0 0 8px 16px' }}>
+                    <ul className="mobile-submenu-list">
                       {item.children!.map((child) => (
                         <li key={child.label}>
                           <Link
                             href={child.href}
                             onClick={() => setMobileOpen(false)}
-                            style={{
-                              color: '#ccc',
-                              fontSize: '15px',
-                              padding: '8px 0',
-                              display: 'block',
-                              textDecoration: 'none',
-                              fontFamily: "'Roboto Condensed', sans-serif",
-                            }}
+                            className="mobile-submenu-link"
                           >
                             {child.label}
                           </Link>
@@ -378,20 +213,289 @@ export default function Header() {
               )
             })}
           </ul>
+
+          <div className="mobile-menu-footer">
+            <Link
+              href="/about/hours"
+              onClick={() => setMobileOpen(false)}
+              className="mobile-map-btn"
+            >
+              Map &amp; Hours
+            </Link>
+            <a href="tel:9037050804" className="mobile-call-btn">
+              Call 903.705.0804
+            </a>
+          </div>
         </div>
       )}
 
       <style>{`
-        @media (max-width: 768px) {
-          header { padding: 15px 20px 10px !important; }
-          .header-phone { font-size: 20px !important; }
-          .navbar-toggle { display: block !important; }
-          #main-nav { display: none !important; }
+        .header-main {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          z-index: 100;
+          background: linear-gradient(to bottom, #000 0%, rgba(0,0,0,0.85) 50%, rgba(0,0,0,0.4) 80%, transparent 100%);
+          padding: 16px 40px;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
         }
-        @media (max-width: 767px) {
-          header { padding: 10px 15px !important; gap: 8px !important; }
-          .header-phone { font-size: 16px !important; }
-          .header-map-btn { font-size: 10px !important; padding: 5px 14px !important; }
+        .header-top-row {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        .site-logo-img {
+          height: auto;
+          width: auto;
+          max-height: 60px;
+          display: block;
+        }
+        .header-right-actions {
+          display: flex;
+          align-items: center;
+          gap: 20px;
+        }
+        .header-social-top {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+        }
+        .header-social-top a {
+          color: #fff;
+          font-size: 18px;
+          transition: color 0.2s;
+        }
+        .header-social-top a:hover {
+          color: #EB2E25;
+        }
+        .header-phone {
+          color: #fff;
+          font-size: 24px;
+          font-weight: 700;
+          text-decoration: none;
+          letter-spacing: -0.02em;
+          font-family: 'Roboto Condensed', sans-serif;
+        }
+        .header-map-btn {
+          border: 2px solid #fff;
+          border-radius: 50px;
+          padding: 8px 24px;
+          color: #fff;
+          font-size: 12px;
+          font-weight: 700;
+          text-transform: uppercase;
+          text-decoration: none;
+          letter-spacing: 0.05em;
+          font-family: 'Roboto Condensed', sans-serif;
+          transition: all 0.3s ease;
+        }
+        .header-map-btn:hover {
+          background: #fff;
+          color: #000;
+        }
+        .navbar-toggle {
+          display: none;
+          background: #EB2E25;
+          border: none;
+          color: #fff;
+          font-size: 24px;
+          cursor: pointer;
+          padding: 8px 12px;
+          border-radius: 6px;
+          box-shadow: 0 2px 10px rgba(235, 46, 37, 0.4);
+        }
+        #main-nav {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+        }
+        .navbar-nav {
+          display: flex;
+          align-items: center;
+          gap: 0;
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+        .nav-item-li {
+          position: relative;
+        }
+        .nav-item-link {
+          color: #fff;
+          font-size: 15px;
+          font-weight: 700;
+          padding: 10px 22px;
+          display: block;
+          text-decoration: none;
+          font-family: 'Roboto Condensed', sans-serif;
+          transition: background 0.2s;
+        }
+        .nav-item-link.active {
+          background: #EB2E25;
+        }
+        .nav-item-link .arrow {
+          font-size: 10px;
+          margin-left: 5px;
+        }
+        .dropdown-menu {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          background: #ef5b54;
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          min-width: 250px;
+          z-index: 1000;
+        }
+        .dropdown-menu.is-open {
+          display: block;
+        }
+        .dropdown-child-link {
+          color: #fff;
+          padding: 8px 20px;
+          display: block;
+          text-decoration: none;
+          font-size: 14px;
+          font-family: 'Roboto Condensed', sans-serif;
+          line-height: 30px;
+        }
+        .dropdown-child-link:hover {
+          background: rgba(0,0,0,0.15);
+        }
+
+        .mobile-menu-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(10, 14, 27, 0.98);
+          z-index: 200;
+          padding: 70px 20px 30px;
+          overflow-y: auto;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }
+        .mobile-menu-close-btn {
+          position: absolute;
+          top: 16px;
+          right: 16px;
+          background: #EB2E25;
+          border: none;
+          color: #fff;
+          font-size: 24px;
+          cursor: pointer;
+          padding: 8px 12px;
+          border-radius: 6px;
+        }
+        .mobile-nav-list {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+        .mobile-nav-item {
+          margin-bottom: 4px;
+          border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .mobile-nav-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+        .mobile-nav-link {
+          color: #fff;
+          font-size: 18px;
+          font-weight: 700;
+          padding: 12px 0;
+          text-decoration: none;
+          font-family: 'Roboto Condensed', sans-serif;
+          flex: 1;
+        }
+        .mobile-dropdown-toggle {
+          background: none;
+          border: none;
+          color: #EB2E25;
+          font-size: 14px;
+          cursor: pointer;
+          padding: 12px;
+        }
+        .mobile-submenu-list {
+          list-style: none;
+          margin: 0;
+          padding: 0 0 12px 16px;
+        }
+        .mobile-submenu-link {
+          color: #ccc;
+          font-size: 15px;
+          padding: 8px 0;
+          display: block;
+          text-decoration: none;
+          font-family: 'Roboto Condensed', sans-serif;
+        }
+        .mobile-menu-footer {
+          margin-top: 30px;
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+        }
+        .mobile-map-btn {
+          border: 2px solid #fff;
+          color: #fff;
+          text-align: center;
+          padding: 12px;
+          border-radius: 6px;
+          font-weight: 700;
+          text-transform: uppercase;
+          text-decoration: none;
+        }
+        .mobile-call-btn {
+          background: #EB2E25;
+          color: #fff;
+          text-align: center;
+          padding: 12px;
+          border-radius: 6px;
+          font-weight: 700;
+          text-transform: uppercase;
+          text-decoration: none;
+        }
+
+        @media (max-width: 991px) {
+          .header-social-top { display: none !important; }
+        }
+        @media (max-width: 768px) {
+          .header-main {
+            padding: 12px 16px !important;
+            background: rgba(10, 14, 27, 0.95) !important;
+          }
+          .site-logo-img {
+            max-height: 38px !important;
+          }
+          .header-right-actions {
+            gap: 8px !important;
+          }
+          .header-phone {
+            font-size: 15px !important;
+          }
+          .navbar-toggle {
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+          }
+          #main-nav {
+            display: none !important;
+          }
+        }
+        @media (max-width: 580px) {
+          .header-map-btn {
+            display: none !important;
+          }
         }
       `}</style>
     </header>
