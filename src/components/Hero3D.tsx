@@ -119,13 +119,25 @@ const ThreeScene = dynamic(() => Promise.resolve(Scene3DContent), { ssr: false }
 
 export default function Hero3D() {
   return (
-    <section className="relative w-full h-screen overflow-hidden">
-      <div className="absolute inset-0">
+    <section className="relative w-full h-screen overflow-hidden bg-[#0A0E1B]">
+      {/* Background Hero Image from HTML Slideshow */}
+      <img
+        src="/images/Supra_SL_20240605_1396_GCM.jpg"
+        alt="Marine World of Texas Boat"
+        className="absolute inset-0 w-full h-full object-cover object-center scale-105"
+      />
+
+      {/* Dark Vignette & Gradient Overlays for Contrast */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0A0E1B] via-[#0A0E1B]/60 to-[#0A0E1B]/30" />
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-[1px]" />
+
+      {/* 3D Interactive Canvas Layer */}
+      <div className="absolute inset-0 pointer-events-none z-0">
         <Canvas
           camera={{ position: [0, 0, 8], fov: 60 }}
           dpr={[1, 2]}
-          gl={{ antialias: true, alpha: false }}
-          style={{ background: '#0A0E1B' }}
+          gl={{ antialias: true, alpha: true }}
+          style={{ background: 'transparent' }}
         >
           <Suspense fallback={null}>
             <OrbitControls
@@ -141,20 +153,19 @@ export default function Hero3D() {
         </Canvas>
       </div>
 
-      <div className="absolute inset-0 bg-gradient-to-t from-[#0A0E1B] via-[#0A0E1B]/50 to-transparent" />
-
+      {/* Hero Content Overlay */}
       <div className="absolute inset-0 flex flex-col items-center justify-center px-4 z-10">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.2 }}
-          className="text-center"
+          className="text-center max-w-5xl"
         >
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black tracking-tight text-white uppercase leading-none">
-            <span className="block">MARINE WORLD</span>
-            <span className="block text-[#EB2E25] mt-1">OF TEXAS</span>
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black tracking-tight text-white uppercase leading-none drop-shadow-2xl">
+            <span className="block drop-shadow-[0_10px_10px_rgba(0,0,0,0.8)]">MARINE WORLD</span>
+            <span className="block text-[#EB2E25] mt-1 drop-shadow-[0_10px_10px_rgba(0,0,0,0.8)]">OF TEXAS</span>
           </h1>
-          <p className="mt-4 text-base sm:text-lg md:text-xl text-gray-300 font-light tracking-[0.2em] uppercase">
+          <p className="mt-4 text-base sm:text-lg md:text-xl text-gray-200 font-light tracking-[0.2em] uppercase drop-shadow-md bg-black/30 px-6 py-2 rounded-full inline-block backdrop-blur-md border border-white/10">
             Your Premier Marine Dealer in Whitehouse, TX
           </p>
         </motion.div>
@@ -167,13 +178,13 @@ export default function Hero3D() {
         >
           <Link
             href="/inventory"
-            className="bg-[#EB2E25] hover:bg-red-700 text-white px-10 py-4 rounded font-bold text-lg uppercase tracking-wider transition-all hover:scale-105"
+            className="bg-[#EB2E25] hover:bg-red-700 text-white px-10 py-4 rounded font-bold text-lg uppercase tracking-wider transition-all hover:scale-105 shadow-lg shadow-red-900/50"
           >
             View Inventory
           </Link>
           <Link
             href="/contact"
-            className="border-2 border-white hover:bg-white hover:text-[#0A0E1B] text-white px-10 py-4 rounded font-bold text-lg uppercase tracking-wider transition-all hover:scale-105"
+            className="border-2 border-white/80 bg-black/40 backdrop-blur-md hover:bg-white hover:text-[#0A0E1B] text-white px-10 py-4 rounded font-bold text-lg uppercase tracking-wider transition-all hover:scale-105 shadow-lg"
           >
             Contact Us
           </Link>
@@ -190,8 +201,8 @@ export default function Hero3D() {
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
         >
-          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center pt-2">
-            <div className="w-1 h-2.5 bg-white/50 rounded-full" />
+          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center pt-2 backdrop-blur-sm bg-black/20">
+            <div className="w-1 h-2.5 bg-white/70 rounded-full" />
           </div>
         </motion.div>
       </motion.div>
