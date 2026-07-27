@@ -692,6 +692,7 @@
   .finv-wrapper .finv-content:after { height: 120px; }
 }
 @media (max-width: 768px) {
+  .index-ctas--1 { margin-top: 0; }
   .mercury-outboards-wrapper { width: 100%; min-width: 0; }
   .welcome-wrapper { width: 100%; }
   .home-row > div { flex-direction: column; }

@@ -43,7 +43,7 @@ export default function HomePage() {
       <AmbientParticlesWrapper />
       <FloatingOrbsWrapper />
 
-      <div style={{ marginTop: '-151px', marginBottom: '-151px' }}>
+      <div className="-mt-[65px] md:-mt-[151px] -mb-[30px] md:-mb-[151px]">
         <Hero3D />
       </div>
 
