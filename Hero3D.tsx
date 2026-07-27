@@ -119,19 +119,20 @@ const ThreeScene = dynamic(() => Promise.resolve(Scene3DContent), { ssr: false }
 
 export default function Hero3D() {
   return (
-    <section className="relative w-full h-screen overflow-hidden">
+    <section className="relative w-full h-screen overflow-hidden bg-[#0A0E1B]">
       {/* Background Hero Image from HTML Slideshow */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-1000 transform scale-105"
-        style={{ backgroundImage: `url('/images/Supra_SL_20240605_1396_GCM.jpg')` }}
+      <img
+        src="/images/Supra_SL_20240605_1396_GCM.jpg"
+        alt="Marine World of Texas Boat"
+        className="absolute inset-0 w-full h-full object-cover object-center scale-105"
       />
 
-      {/* Dark Vignette & Gradient Overlays for Readability */}
+      {/* Dark Vignette & Gradient Overlays for Contrast */}
       <div className="absolute inset-0 bg-gradient-to-t from-[#0A0E1B] via-[#0A0E1B]/60 to-[#0A0E1B]/30" />
-      <div className="absolute inset-0 bg-black/30 backdrop-blur-[1px]" />
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-[1px]" />
 
       {/* 3D Interactive Canvas Layer */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 pointer-events-none z-0">
         <Canvas
           camera={{ position: [0, 0, 8], fov: 60 }}
           dpr={[1, 2]}
