@@ -471,22 +471,46 @@ export default function Header() {
         }
         @media (max-width: 768px) {
           .header-main {
-            padding: 12px 16px !important;
-            background: rgba(10, 14, 27, 0.95) !important;
+            padding: 10px 14px !important;
+            background: rgba(10, 14, 27, 0.96) !important;
+          }
+          .header-logo {
+            flex: 0 0 auto !important;
+            margin-right: auto !important;
           }
           .site-logo-img {
-            max-height: 38px !important;
+            max-height: 34px !important;
           }
           .header-right-actions {
-            gap: 8px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: flex-end !important;
+            gap: 6px !important;
+            margin-left: auto !important;
           }
           .header-phone {
-            font-size: 15px !important;
+            font-size: 13px !important;
+            font-weight: 700 !important;
+            color: #ffffff !important;
+            background: rgba(255, 255, 255, 0.12) !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            padding: 4px 10px !important;
+            border-radius: 20px !important;
+            white-space: nowrap !important;
+            margin-left: auto !important;
           }
           .navbar-toggle {
             display: flex !important;
-            align-items: center;
-            justify-content: center;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 38px !important;
+            height: 38px !important;
+            padding: 0 !important;
+            background: #EB2E25 !important;
+            color: #ffffff !important;
+            border-radius: 8px !important;
+            box-shadow: 0 2px 8px rgba(235, 46, 37, 0.5) !important;
+            flex-shrink: 0 !important;
           }
           #main-nav {
             display: none !important;

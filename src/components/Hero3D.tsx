@@ -65,7 +65,7 @@ export default function Hero3D() {
       <img
         src="/images/Supra_SL_20240605_1396_GCM.jpg"
         alt="Marine World of Texas Boat"
-        className="absolute inset-0 w-full h-full object-cover object-[65%_center] sm:object-center scale-100 sm:scale-105 transition-all duration-500"
+        className="absolute inset-0 w-full h-full object-cover object-center scale-100 sm:scale-105 transition-all duration-500"
       />
 
       {/* Subtle Gradient Overlay for Text Legibility without obscuring the boat */}
